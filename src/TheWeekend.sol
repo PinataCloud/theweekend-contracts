@@ -7,25 +7,20 @@ import {Ownable} from "../dependencies/@openzeppelin-contracts-5.3.0-rc.0/access
 /// @custom:security-contact steve@pinata.cloud
 contract TheWeekend is ERC1155, Ownable {
     // DateTime constants from BokkyPooBah's library
-    uint public constant SECONDS_PER_DAY = 24 * 60 * 60;
-    uint public constant SECONDS_PER_HOUR = 60 * 60;
-    uint public constant SECONDS_PER_MINUTE = 60;
+    uint256 public constant SECONDS_PER_DAY = 24 * 60 * 60;
+    uint256 public constant SECONDS_PER_HOUR = 60 * 60;
+    uint256 public constant SECONDS_PER_MINUTE = 60;
 
     // Day of week constants
-    uint public constant DOW_MON = 1;
-    uint public constant DOW_TUE = 2;
-    uint public constant DOW_WED = 3;
-    uint public constant DOW_THU = 4;
-    uint public constant DOW_FRI = 5;
-    uint public constant DOW_SAT = 6;
-    uint public constant DOW_SUN = 7;
+    uint256 public constant DOW_MON = 1;
+    uint256 public constant DOW_TUE = 2;
+    uint256 public constant DOW_WED = 3;
+    uint256 public constant DOW_THU = 4;
+    uint256 public constant DOW_FRI = 5;
+    uint256 public constant DOW_SAT = 6;
+    uint256 public constant DOW_SUN = 7;
 
-    constructor()
-        ERC1155(
-            "ipfs://bafkreie6npd5qvtugmm54swvcg3zmvawvhe2hkwocwsrdipb7ouw2xwr74"
-        )
-        Ownable(msg.sender)
-    {}
+    constructor() ERC1155("ipfs://bafkreie6npd5qvtugmm54swvcg3zmvawvhe2hkwocwsrdipb7ouw2xwr74") Ownable(msg.sender) {}
 
     function setURI(string memory newuri) public onlyOwner {
         _setURI(newuri);
@@ -38,17 +33,14 @@ contract TheWeekend is ERC1155, Ownable {
     }
 
     // Implementation of the isWeekEnd function from BokkyPooBah's library
-    function isWeekEnd(uint timestamp) public pure returns (bool weekEnd) {
-        uint dayOfWeek = getDayOfWeek(timestamp);
-        return
-            dayOfWeek == DOW_SAT ||
-            dayOfWeek == DOW_SUN ||
-            dayOfWeek == DOW_FRI;
+    function isWeekEnd(uint256 timestamp) public pure returns (bool weekEnd) {
+        uint256 dayOfWeek = getDayOfWeek(timestamp);
+        return dayOfWeek == DOW_SAT || dayOfWeek == DOW_SUN || dayOfWeek == DOW_FRI;
     }
 
     // Implementation of the getDayOfWeek function from BokkyPooBah's library
-    function getDayOfWeek(uint timestamp) public pure returns (uint dayOfWeek) {
-        uint _days = timestamp / SECONDS_PER_DAY;
+    function getDayOfWeek(uint256 timestamp) public pure returns (uint256 dayOfWeek) {
+        uint256 _days = timestamp / SECONDS_PER_DAY;
         dayOfWeek = ((_days + 3) % 7) + 1; // 1970/01/01 is Thursday (day 4)
     }
 
