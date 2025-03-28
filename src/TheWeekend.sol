@@ -35,7 +35,7 @@ contract TheWeekend is ERC1155, Ownable {
     // Implementation of the isWeekEnd function from BokkyPooBah's library
     function isWeekEnd(uint256 timestamp) public pure returns (bool weekEnd) {
         uint256 dayOfWeek = getDayOfWeek(timestamp);
-        return dayOfWeek == DOW_SAT || dayOfWeek == DOW_SUN || dayOfWeek == DOW_FRI;
+        return dayOfWeek == DOW_SAT || dayOfWeek == DOW_SUN;
     }
 
     // Implementation of the getDayOfWeek function from BokkyPooBah's library
